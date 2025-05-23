@@ -41,16 +41,9 @@ public:
   }
 
 private:
-  // Ideja za samostalan rad:
-  // Implementirati mogućnost izbora dimenzije ploče za igru
-  // Korisnik na početku programa unosi da li želi igrati
-  // na ploči dimenzije 3x3, 5x5 ili 10x10. Ovu dimenziju možete
-  // prenijeti klasi Board kroz konstruktor.
-  // Da li za ovu mogućnost treba dinamicki alocirati niz?
   char data_[9];
 };
 
-// Pitanje - da li smo operator<< mogli napraviti kao metodu?
 std::ostream& operator<<(std::ostream& out, const Board& board) {
   for (int i = 0; i < 3; i++) {
     out << "------" << std::endl;
@@ -62,10 +55,8 @@ std::ostream& operator<<(std::ostream& out, const Board& board) {
   return out << "------";
 }
 
-// Pitanje: Da li je ova klasa interface - cista virtuelna klasa?
 class Player {
 public:
-  // Pitanje - zasto virtuelni dtor?
   virtual ~Player() = default;
   virtual void play(Board& board) = 0;
   virtual char symbol() const = 0;
@@ -83,11 +74,9 @@ public:
       std::cout << "Unesite lokaciju: ";
       std::cin >> i >> j;
     } while (!board.free(i, j) && std::cout << "Unesite ponovo" << std::endl);
-    // Pitanje: kako radi ispis u uslovu u do-while petlje (linija iznad)?
     board.set(i, j, c_);
   }
 
-  // Pitanje: sta bi se desilo ako bi ovdje izbrisali kljucnu rijec const?
   char symbol() const override {
     return c_;
   }
